@@ -97,6 +97,38 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: #E2E8F0; disp
 .options-row { display: flex; gap: 10px; margin-top: 15px; justify-content: center; width: 100%; min-height: 70px; flex-wrap: wrap; }
 .options-column { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 40px; }
 
+/* ========== Emoji 视觉题干卡片（统一尺寸，无弹出动画） ========== */
+.word-emoji-card {
+    background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+    border: 2px solid rgba(74, 144, 226, 0.2);
+    border-radius: 20px;
+    padding: 12px 22px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 6px 16px -4px rgba(74, 144, 226, 0.25);
+    flex-shrink: 0;
+}
+.word-emoji-card.compact {
+    padding: 12px 22px;
+}
+.word-emoji {
+    font-size: 44px;
+    line-height: 1;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
+}
+.word-emoji-card.compact .word-emoji {
+    font-size: 44px;
+}
+.word-emoji-label {
+    font-size: 15px;
+    color: var(--tip-title);
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-top: 2px;
+}
+
 .grammar-note {
     background: var(--tip-bg);
     border-left: 4px solid var(--tip-accent);
@@ -210,42 +242,76 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: #E2E8F0; disp
 <button class="bottom-btn" style="width: auto; padding: 18px 60px; margin-top: 0;" onclick="goStep(1)">开始学习</button>
 </div>
 
+<!-- ========== STEP 1：选择"吃" ========== -->
 <div id="step1" class="step">
-<div class="task-card"><div class="task-content">请选择正确选项</div></div>
-<div style="margin-top:80px; text-align:center;"><div class="blank-line" id="s1-blank"></div><div class="translation-main">吃</div></div>
-<div class="options-column" id="s1-options">
-<div class="opt-item-wide" onclick="checkS1('먹', this)"><span class="roman">meok-da</span><span class="kor-text">먹다</span></div>
-<div class="opt-item-wide" onclick="checkS1('듣', this)"><span class="roman">deut-da</span><span class="kor-text">듣다</span></div>
-</div>
-<button id="s1-next-btn" class="bottom-btn" style="display:none" onclick="goStep(2)">继续</button>
+    <div class="task-card"><div class="task-content">请选择正确选项</div></div>
+    <div style="margin-top:25px; display:flex; flex-direction:column; align-items:center;">
+        <div class="word-emoji-card">
+            <div class="word-emoji">🍴</div>
+            <div class="word-emoji-label">吃</div>
+        </div>
+        <div class="blank-line" id="s1-blank" style="margin-top:20px; min-height:60px;"></div>
+    </div>
+    <div class="options-column" id="s1-options" style="margin-top:10px;">
+        <div class="opt-item-wide" onclick="checkS1('먹', this)"><span class="roman">meok-da</span><span class="kor-text">먹다</span></div>
+        <div class="opt-item-wide" onclick="checkS1('듣', this)"><span class="roman">deut-da</span><span class="kor-text">듣다</span></div>
+    </div>
+    <button id="s1-next-btn" class="bottom-btn" style="display:none" onclick="goStep(2)">继续</button>
 </div>
 
+<!-- ========== STEP 2：拼写"吃" ========== -->
 <div id="step2" class="step">
-<div class="task-card"><div class="task-tag">请拼写</div><div class="task-content">拼写动词：吃</div></div>
-<div style="display:flex; gap:15px; margin:25px 0;"><div id="s2-1" class="slot-unit"></div><div id="s2-2" class="slot-unit"></div></div>
-<div class="options-row"><div class="opt-card" onclick="checkS2('다', 'da', this)"><span class="roman">da</span><span class="kor-text">다</span></div><div class="opt-card" onclick="checkS2('먹', 'meok', this)"><span class="roman">meok</span><span class="kor-text">먹</span></div></div>
-<button id="s2-next-btn" class="bottom-btn fade-in-up" style="display: none;" onclick="goStep(3)">继续</button>
+    <div class="task-card"><div class="task-tag">请拼写</div><div class="task-content">拼写动词：吃</div></div>
+    <div class="word-emoji-card compact" style="margin-top:5px;">
+        <div class="word-emoji">🍴</div>
+        <div class="word-emoji-label">吃</div>
+    </div>
+    <div style="display:flex; gap:15px; margin:25px 0;">
+        <div id="s2-1" class="slot-unit"></div>
+        <div id="s2-2" class="slot-unit"></div>
+    </div>
+    <div class="options-row">
+        <div class="opt-card" onclick="checkS2('다', 'da', this)"><span class="roman">da</span><span class="kor-text">다</span></div>
+        <div class="opt-card" onclick="checkS2('먹', 'meok', this)"><span class="roman">meok</span><span class="kor-text">먹</span></div>
+    </div>
+    <button id="s2-next-btn" class="bottom-btn fade-in-up" style="display: none;" onclick="goStep(3)">继续</button>
 </div>
 
+<!-- ========== STEP 3：选择"想" ========== -->
 <div id="step3" class="step">
-<div class="task-card"><div class="task-content">请选择正确选项</div></div>
-<div style="margin-top:80px; text-align:center;"><div class="blank-line" id="s3-blank"></div><div class="translation-main">想</div></div>
-<div class="options-column" id="s3-options">
-<div class="opt-item-wide" onclick="checkS3('먹', this)"><span class="roman">meok-da</span><span class="kor-text">먹다</span></div>
-<div class="opt-item-wide" onclick="checkS3('고싶', this)"><span class="roman">go-sip-da</span><span class="kor-text">고 싶다</span></div>
-</div>
-<button id="s3-next-btn" class="bottom-btn" style="display:none" onclick="goStep(4)">继续</button>
+    <div class="task-card"><div class="task-content">请选择正确选项</div></div>
+    <div style="margin-top:25px; display:flex; flex-direction:column; align-items:center;">
+        <div class="word-emoji-card">
+            <div class="word-emoji">💭</div>
+            <div class="word-emoji-label">想</div>
+        </div>
+        <div class="blank-line" id="s3-blank" style="margin-top:20px; min-height:60px;"></div>
+    </div>
+    <div class="options-column" id="s3-options" style="margin-top:10px;">
+        <div class="opt-item-wide" onclick="checkS3('먹', this)"><span class="roman">meok-da</span><span class="kor-text">먹다</span></div>
+        <div class="opt-item-wide" onclick="checkS3('고싶', this)"><span class="roman">go-sip-da</span><span class="kor-text">고 싶다</span></div>
+    </div>
+    <button id="s3-next-btn" class="bottom-btn" style="display:none" onclick="goStep(4)">继续</button>
 </div>
 
+<!-- ========== STEP 4：拼写"想" ========== -->
 <div id="step4" class="step">
-<div class="task-card"><div class="task-tag">请拼写</div><div class="task-content">拼写：想</div></div>
-<div style="display:flex; gap:10px; margin:25px 0;"><div id="s4-1" class="slot-unit"></div><div id="s4-2" class="slot-unit"></div><div id="s4-3" class="slot-unit"></div></div>
-<div class="options-row">
-<div class="opt-card" onclick="checkS4('다', 'da', this)"><span class="roman">da</span><span class="kor-text">다</span></div>
-<div class="opt-card" onclick="checkS4('고', 'go', this)"><span class="roman">go</span><span class="kor-text">고</span></div>
-<div class="opt-card" onclick="checkS4('싶', 'sip', this)"><span class="roman">sip</span><span class="kor-text">싶</span></div>
-</div>
-<button id="s4-next-btn" class="bottom-btn fade-in-up" style="display: none;" onclick="goStep(5)">继续</button>
+    <div class="task-card"><div class="task-tag">请拼写</div><div class="task-content">拼写：想</div></div>
+    <div class="word-emoji-card compact" style="margin-top:5px;">
+        <div class="word-emoji">💭</div>
+        <div class="word-emoji-label">想</div>
+    </div>
+    <div style="display:flex; gap:10px; margin:25px 0;">
+        <div id="s4-1" class="slot-unit"></div>
+        <div id="s4-2" class="slot-unit"></div>
+        <div id="s4-3" class="slot-unit"></div>
+    </div>
+    <div class="options-row">
+        <div class="opt-card" onclick="checkS4('다', 'da', this)"><span class="roman">da</span><span class="kor-text">다</span></div>
+        <div class="opt-card" onclick="checkS4('고', 'go', this)"><span class="roman">go</span><span class="kor-text">고</span></div>
+        <div class="opt-card" onclick="checkS4('싶', 'sip', this)"><span class="roman">sip</span><span class="kor-text">싶</span></div>
+    </div>
+    <button id="s4-next-btn" class="bottom-btn fade-in-up" style="display: none;" onclick="goStep(5)">继续</button>
 </div>
 
 <!-- ========== STEP 5：纯填空题（先搭出"我吃蛋糕"） ========== -->
@@ -347,19 +413,35 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: #E2E8F0; disp
     <button id="s6-next-btn" class="bottom-btn" style="display:none" onclick="goStep(7)">继续</button>
 </div>
 
+<!-- ========== STEP 7：选择"喝" ========== -->
 <div id="step7" class="step">
-<div class="task-card"><div class="task-content">请选择正确选项</div></div>
-<div style="margin-top:80px; text-align:center;"><div class="blank-line" id="s7-blank"></div><div class="translation-main">喝</div></div>
-<div class="options-column" id="s7-options">
-<div class="opt-item-wide" onclick="checkS7('고싶', this)"><span class="roman">go-sip-da</span><span class="kor-text">고 싶다</span></div>
-<div class="opt-item-wide" onclick="checkS7('마시', this)"><span class="roman">ma-si-da</span><span class="kor-text">마시다</span></div>
-</div>
-<button id="s7-next-btn" class="bottom-btn" style="display:none" onclick="goStep(8)">继续</button>
+    <div class="task-card"><div class="task-content">请选择正确选项</div></div>
+    <div style="margin-top:25px; display:flex; flex-direction:column; align-items:center;">
+        <div class="word-emoji-card">
+            <div class="word-emoji">🥤</div>
+            <div class="word-emoji-label">喝</div>
+        </div>
+        <div class="blank-line" id="s7-blank" style="margin-top:20px; min-height:60px;"></div>
+    </div>
+    <div class="options-column" id="s7-options" style="margin-top:10px;">
+        <div class="opt-item-wide" onclick="checkS7('고싶', this)"><span class="roman">go-sip-da</span><span class="kor-text">고 싶다</span></div>
+        <div class="opt-item-wide" onclick="checkS7('마시', this)"><span class="roman">ma-si-da</span><span class="kor-text">마시다</span></div>
+    </div>
+    <button id="s7-next-btn" class="bottom-btn" style="display:none" onclick="goStep(8)">继续</button>
 </div>
 
+<!-- ========== STEP 8：拼写"喝" ========== -->
 <div id="step8" class="step">
     <div class="task-card"><div class="task-tag">请拼写</div><div class="task-content">拼写动词：喝</div></div>
-    <div style="display:flex; gap:10px; margin:25px 0;"><div id="s8-1" class="slot-unit" style="width:50px"></div><div id="s8-2" class="slot-unit" style="width:50px"></div><div id="s8-3" class="slot-unit" style="width:50px"></div></div>
+    <div class="word-emoji-card compact" style="margin-top:5px;">
+        <div class="word-emoji">🥤</div>
+        <div class="word-emoji-label">喝</div>
+    </div>
+    <div style="display:flex; gap:10px; margin:25px 0;">
+        <div id="s8-1" class="slot-unit" style="width:50px"></div>
+        <div id="s8-2" class="slot-unit" style="width:50px"></div>
+        <div id="s8-3" class="slot-unit" style="width:50px"></div>
+    </div>
     <div class="options-row">
         <div class="opt-card" onclick="checkS8('시', 'si', this)"><span class="roman">si</span><span class="kor-text">시</span></div>
         <div class="opt-card" onclick="checkS8('다', 'da', this)"><span class="roman">da</span><span class="kor-text">다</span></div>
@@ -391,22 +473,37 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: #E2E8F0; disp
     <button id="s9-next-btn" class="bottom-btn" style="display:none" onclick="goStep(10)">继续</button>
 </div>
 
+<!-- ========== STEP 10：选择"买" ========== -->
 <div id="step10" class="step">
     <div class="task-card"><div class="task-content">请选择正确选项</div></div>
-    <div style="margin-top:80px; text-align:center;"><div class="blank-line" id="s10-blank"></div><div class="translation-main">买</div></div>
-    <div class="options-column" id="s10-options">
+    <div style="margin-top:25px; display:flex; flex-direction:column; align-items:center;">
+        <div class="word-emoji-card">
+            <div class="word-emoji">🛍️</div>
+            <div class="word-emoji-label">买</div>
+        </div>
+        <div class="blank-line" id="s10-blank" style="margin-top:20px; min-height:60px;"></div>
+    </div>
+    <div class="options-column" id="s10-options" style="margin-top:10px;">
         <div class="opt-item-wide" onclick="checkS10('마시', this)"><span class="roman">ma-si-da</span><span class="kor-text">마시다</span></div>
         <div class="opt-item-wide" onclick="checkS10('사', this)"><span class="roman">sa-da</span><span class="kor-text">사다</span></div>
     </div>
     <button id="s10-next-btn" class="bottom-btn" style="display:none" onclick="goStep(11)">继续</button>
 </div>
 
+<!-- ========== STEP 11：拼写"买" ========== -->
 <div id="step11" class="step">
     <div class="task-card"><div class="task-tag">请拼写</div><div class="task-content">拼写动词：买</div></div>
-    <div style="display:flex; gap:15px; margin:25px 0;"><div id="s11-1" class="slot-unit"></div><div id="s11-2" class="slot-unit"></div></div>
+    <div class="word-emoji-card compact" style="margin-top:5px;">
+        <div class="word-emoji">🛍️</div>
+        <div class="word-emoji-label">买</div>
+    </div>
+    <div style="display:flex; gap:15px; margin:25px 0;">
+        <div id="s11-1" class="slot-unit"></div>
+        <div id="s11-2" class="slot-unit"></div>
+    </div>
     <div class="options-row">
         <div class="opt-card" onclick="checkS11('다', 'da', this)"><span class="roman">da</span><span class="kor-text">다</span></div>
-        <div class="opt-card" onclick="checkS11('사', 'sa', this)"><span class="roman">sa</span><span class="kor-text">사</span></div>
+        <div class="opt-card" onclick="checkS11('사', 'sa', this)"><span class="roman">사</span><span class="kor-text">사</span></div>
     </div>
     <button id="s11-next-btn" class="bottom-btn fade-in-up" style="display: none;" onclick="goStep(12)">继续</button>
 </div>
